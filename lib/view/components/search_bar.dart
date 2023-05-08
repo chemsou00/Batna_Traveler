@@ -1,4 +1,4 @@
-import 'package:batna_traveler/view/widgets/search_field-decoration.dart';
+import 'package:batna_traveler/view/components/search_field-decoration.dart';
 import 'package:flutter/material.dart';
 
 

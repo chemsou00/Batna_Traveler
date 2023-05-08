@@ -1,4 +1,3 @@
-import 'package:batna_traveler/config/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 InputDecoration searchField = const InputDecoration(

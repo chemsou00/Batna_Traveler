@@ -1,10 +1,10 @@
 import 'package:batna_traveler/config/constants/app_colors.dart';
 import 'package:batna_traveler/config/routes/routs.dart';
-import 'package:batna_traveler/view/widgets/onboarding_widgets.dart';
+import 'package:batna_traveler/view/components/common_widgets.dart';
+import 'package:batna_traveler/view/components/onboarding_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/common_widgets.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({Key? key}) : super(key: key);

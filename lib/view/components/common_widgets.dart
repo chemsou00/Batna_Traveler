@@ -1,9 +1,5 @@
 
-
-
 import 'package:flutter/material.dart';
-
-import '../../config/constants/app_colors.dart';
 
 class LogoApp extends StatelessWidget {
   const LogoApp({Key? key}) : super(key: key);

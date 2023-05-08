@@ -1,6 +1,4 @@
 import 'package:batna_traveler/config/routes/routs.dart';
-import 'package:batna_traveler/view/screens/home_screen.dart';
-import 'package:batna_traveler/view/screens/on_boarding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Batna Traveler',
       getPages: routes,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.cyan,
       ),
     );
   }
