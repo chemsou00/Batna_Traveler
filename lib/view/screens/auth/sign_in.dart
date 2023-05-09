@@ -1,5 +1,6 @@
 import 'package:batna_traveler/config/constants/app_colors.dart';
 import 'package:batna_traveler/config/routes/routs.dart';
+import 'package:batna_traveler/controller/sign_in_controller.dart';
 import 'package:batna_traveler/view/components/common_widgets.dart';
 import 'package:batna_traveler/view/components/decoration.dart';
 import 'package:batna_traveler/view/components/onboarding_widgets.dart';
@@ -8,17 +9,19 @@ import 'package:get/get.dart';
 
 import '../../../core/functions/valid_input.dart';
 
-
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(SignInController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Form(
+        key: controller.formState,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const LogoApp(),
             const Text(
               "Welcome\nBack",
@@ -45,6 +48,7 @@ class SignInScreen extends StatelessWidget {
                     height: Get.size.height * 0.09,
                   ),
                   TextFormField(
+                    controller: controller.emailController,
                     validator: (val) {
                       return validInput(val!, 40, 7, "email");
                     },
@@ -56,6 +60,7 @@ class SignInScreen extends StatelessWidget {
                     height: 30,
                   ),
                   TextFormField(
+                    controller: controller.passwordController,
                     validator: (val) {
                       return validInput(val!, 20, 8, "password");
                     },
@@ -63,11 +68,7 @@ class SignInScreen extends StatelessWidget {
                     decoration: textFieldDecoration.copyWith(
                       hintText: "Password",
                       prefixIcon: const Icon(Icons.password),
-                      suffixIcon: IconButton(
-                          icon: const Icon(Icons.visibility_off),
-                          onPressed: () {
-                            //controller.obscure();
-                          }),
+                      suffixIcon: const Icon(Icons.visibility_off),
                     ),
                   ),
                   const SizedBox(
@@ -76,7 +77,7 @@ class SignInScreen extends StatelessWidget {
                   CustomButton(
                     title: 'Sign In',
                     onPressed: () {
-                      Get.offNamed(AppRouts.homeScreen);
+                      controller.signIn();
                     },
                   ),
                   const SizedBox(
@@ -84,7 +85,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                       onTap: () {
-                        Get.toNamed(AppRouts.signUpScreen);
+                        Get.offNamed(AppRouts.signUpScreen);
                       },
                       child: const Text(
                         "I d ont have an account !",

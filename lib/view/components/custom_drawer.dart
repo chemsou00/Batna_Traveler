@@ -1,10 +1,13 @@
+import 'package:batna_traveler/controller/drawer_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(CustomDrawerController());
     return Drawer(
       child: Column(
         children:  [
@@ -34,7 +37,9 @@ class CustomDrawer extends StatelessWidget {
           ),
           const Spacer(),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              controller.logout();
+            },
             title: const Text("Logout"),
             leading: const Icon(Icons.logout),
             trailing: const Icon(Icons.arrow_forward),
