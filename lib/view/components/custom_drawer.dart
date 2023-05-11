@@ -1,3 +1,4 @@
+import 'package:batna_traveler/config/routes/routs.dart';
 import 'package:batna_traveler/controller/drawer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ class CustomDrawer extends StatelessWidget {
     var controller = Get.put(CustomDrawerController());
     return Drawer(
       child: Column(
-        children:  [
+        children: [
           const UserAccountsDrawerHeader(
             accountName: Text("accountName"),
             accountEmail: Text("account@Email.com"),
@@ -30,7 +31,11 @@ class CustomDrawer extends StatelessWidget {
             trailing: const Icon(Icons.arrow_forward),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () async {
+              Get.back();
+              await Future.delayed(const Duration(milliseconds: 500));
+              Get.toNamed(AppRouts.adminPanel);
+            },
             title: const Text("Admin Panel"),
             leading: const Icon(Icons.admin_panel_settings),
             trailing: const Icon(Icons.arrow_forward),
