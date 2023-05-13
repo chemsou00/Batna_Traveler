@@ -15,7 +15,7 @@ class Crud {
             .timeout(const Duration(seconds: 10));
         if (response.statusCode == 200 || response.statusCode == 201) {
           Map responseBody = jsonDecode(response.body);
-          //print(responseBody);
+          print(responseBody);
           return Right(responseBody);
         } else {
           return const Left(StatusRequest.serverFailure);

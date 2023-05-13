@@ -48,6 +48,8 @@ class SignInScreen extends StatelessWidget {
                     height: Get.size.height * 0.09,
                   ),
                   TextFormField(
+                    // autofocus: true,
+                    textInputAction: TextInputAction.next,
                     controller: controller.emailController,
                     validator: (val) {
                       return validInput(val!, 40, 7, "email");
@@ -60,6 +62,7 @@ class SignInScreen extends StatelessWidget {
                     height: 30,
                   ),
                   TextFormField(
+                    textInputAction: TextInputAction.go,
                     controller: controller.passwordController,
                     validator: (val) {
                       return validInput(val!, 20, 8, "password");
