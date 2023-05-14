@@ -1,4 +1,4 @@
-import 'package:batna_traveler/controller/admin/admin_panel_home.dart';
+import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:batna_traveler/view/screens/auth/sign_in.dart';
 import 'package:batna_traveler/view/screens/auth/sign_up.dart';
 import 'package:batna_traveler/view/screens/home_screen.dart';

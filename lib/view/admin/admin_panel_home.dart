@@ -1,6 +1,10 @@
 import 'package:batna_traveler/config/constants/app_colors.dart';
+import 'package:batna_traveler/view/admin/show_all_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+
+List<String> category = ["Hotel","Restaurant","Beach","Spa"];
 class AdminPanel extends StatelessWidget {
   const AdminPanel({Key? key}) : super(key: key);
 
@@ -18,46 +22,20 @@ class AdminPanel extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Home Screen Contents",
+              "Home Screen Config",
               style:
                   Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
             ),
-            Card(
-              clipBehavior: Clip.antiAlias,
-              elevation: 3,
-              color: Colors.cyan,
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: ListTile(
-                onTap: () {},
-                title: const Text("Category Config"),
-                leading: const Icon(Icons.change_circle_outlined),
-                trailing: const Icon(Icons.arrow_forward),
-              ),
-            ),
-            Card(
-              clipBehavior: Clip.antiAlias,
-              elevation: 3,
-              color: AppColors.kPrimaryColor,
-              margin: const EdgeInsets.symmetric(vertical: 5),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: ListTile(
-                onTap: () {},
-                title: const Text("Events Config"),
-                leading: const Icon(Icons.change_circle_outlined),
-                trailing: const Icon(Icons.arrow_forward),
-              ),
-            ),
+            HomeScreenPanelCard(onTap: (){},title: "Category's Config",),
+            HomeScreenPanelCard(onTap: (){},title: "Events Config",),
             Text(
-              "Modify Data from Category",
+              "Modify from Category's",
               style:
                   Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
             ),
             Flexible(
                 child: ListView.builder(physics: const BouncingScrollPhysics(),
-                  itemCount: 3,
+                  itemCount: category.length,
                     itemBuilder: (context,index)=>
                         Card(
                           clipBehavior: Clip.antiAlias,
@@ -67,8 +45,13 @@ class AdminPanel extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           child: ListTile(
-                            onTap: () {},
-                            title: const Text("Hotels"),
+                            onTap: () {
+                              Get.to(const ShowAllData(),arguments: {
+                                "title" : category[index],
+                                "index" : index,
+                              });
+                            },
+                            title: Text(category[index]),
                             leading: const Icon(Icons.change_circle_outlined),
                             trailing: const Icon(Icons.arrow_forward),
                           ),
@@ -76,6 +59,33 @@ class AdminPanel extends StatelessWidget {
                 ))
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HomeScreenPanelCard extends StatelessWidget {
+  const HomeScreenPanelCard({
+    super.key,required this.onTap, required this.title
+  });
+
+  final void Function()? onTap;
+  final String title ;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      elevation: 3,
+      color: AppColors.kPrimaryColor,
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)),
+      child: ListTile(
+        onTap: onTap,
+        title: Text(title),
+        leading: const Icon(Icons.change_circle_outlined),
+        trailing: const Icon(Icons.arrow_forward),
       ),
     );
   }
