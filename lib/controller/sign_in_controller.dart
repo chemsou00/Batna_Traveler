@@ -31,13 +31,22 @@ class SignInController extends GetxController {
         statusRequest = StatusRequest.loading;
         loadingMessage.showLoading();
         var response = await signInData.postData(emailController.text,passwordController.text,);
+        print("=============================== Controller $response ");
         statusRequest = handlingData(response);
         print(statusRequest);
         // print(response);
         if (StatusRequest.success == statusRequest) {
           if (response['status'] == "success") {
-            //myServices.sharedPreferences.setString("email", emailController.text);
             Get.back();
+            //print("This is User Id : ${response['data']['user_id']}");
+            myServices.sharedPreferences.setBool("login", true);
+            myServices.sharedPreferences.setInt("id", response['data']['user_id']);
+            myServices.sharedPreferences
+                .setString("username", response['data']['user_name']);
+            myServices.sharedPreferences
+                .setString("email", response['data']['user_email']);
+            myServices.sharedPreferences
+                .setInt("role", response['data']['user_role']);
             Get.offNamed(
               AppRouts.homeScreen,
             );

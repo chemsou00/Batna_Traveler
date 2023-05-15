@@ -1,7 +1,8 @@
 
 
 class AppLink{
-  static const String server = "http://10.0.2.2/batna_traveler";
+  // static const String server = "http://10.0.2.2/batna_traveler";
+  static const String server = "http://192.168.1.2/batna_traveler";
 
   static const String test = "$server/test.php";
 

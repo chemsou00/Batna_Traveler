@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Batna Traveler',
-      initialRoute: AppRouts.homeScreen,
+      // initialRoute: AppRouts.homeScreen,
       getPages: routes,
       initialBinding: InitialBindings(),
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+         primarySwatch: Colors.cyan
       ),
     );
   }

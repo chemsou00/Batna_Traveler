@@ -1,15 +1,17 @@
 import 'package:batna_traveler/config/constants/app_colors.dart';
+import 'package:batna_traveler/controller/admin/admin_panel_controller.dart';
 import 'package:batna_traveler/view/admin/show_all_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+List<String> category = ["Hotel", "Restaurant", "Beach", "Spa","Mountain","Restaurant","Motel"];
 
-List<String> category = ["Hotel","Restaurant","Beach","Spa"];
 class AdminPanel extends StatelessWidget {
   const AdminPanel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AdminPanelController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -26,37 +28,51 @@ class AdminPanel extends StatelessWidget {
               style:
                   Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
             ),
-            HomeScreenPanelCard(onTap: (){},title: "Category's Config",),
-            HomeScreenPanelCard(onTap: (){},title: "Events Config",),
+            HomeScreenPanelCard(
+              onTap: () {},
+              title: "Category's Config",
+            ),
+            HomeScreenPanelCard(
+              onTap: () {},
+              title: "Events Config",
+            ),
             Text(
-              "Modify from Category's",
+              "Users",
+              style:
+              Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
+            ),
+            Flexible(flex: 1,
+              child: HomeScreenPanelCard(
+                onTap: () {},
+                title: "All User",
+              ),
+            ),
+            Text(
+              "All Category's",
               style:
                   Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
             ),
-            Flexible(
-                child: ListView.builder(physics: const BouncingScrollPhysics(),
-                  itemCount: category.length,
-                    itemBuilder: (context,index)=>
-                        Card(
-                          clipBehavior: Clip.antiAlias,
-                          elevation: 3,
-                          // color: AppColors.kPrimaryColor,
-                          margin: const EdgeInsets.symmetric(vertical: 5),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: ListTile(
-                            onTap: () {
-                              Get.to(const ShowAllData(),arguments: {
-                                "title" : category[index],
-                                "index" : index,
-                              });
-                            },
-                            title: Text(category[index]),
-                            leading: const Icon(Icons.change_circle_outlined),
-                            trailing: const Icon(Icons.arrow_forward),
-                          ),
-                        ),
-                ))
+            Flexible(flex: 5,
+                child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: category.length,
+              itemBuilder: (context, index) => Card(
+                clipBehavior: Clip.antiAlias,
+                elevation: 3,
+                // color: AppColors.kPrimaryColor,
+                margin: const EdgeInsets.symmetric(vertical: 5),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: ListTile(
+                  onTap: () {
+                    controller.goToShowData(index);
+                  },
+                  title: Text(category[index]),
+                  leading: const Icon(Icons.change_circle_outlined),
+                  trailing: const Icon(Icons.arrow_forward),
+                ),
+              ),
+            )),
           ],
         ),
       ),
@@ -65,12 +81,11 @@ class AdminPanel extends StatelessWidget {
 }
 
 class HomeScreenPanelCard extends StatelessWidget {
-  const HomeScreenPanelCard({
-    super.key,required this.onTap, required this.title
-  });
+  const HomeScreenPanelCard(
+      {super.key, required this.onTap, required this.title});
 
   final void Function()? onTap;
-  final String title ;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +94,7 @@ class HomeScreenPanelCard extends StatelessWidget {
       elevation: 3,
       color: AppColors.kPrimaryColor,
       margin: const EdgeInsets.symmetric(vertical: 5),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         onTap: onTap,
         title: Text(title),

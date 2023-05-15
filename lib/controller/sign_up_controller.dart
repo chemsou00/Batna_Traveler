@@ -50,7 +50,7 @@ class SignUpController extends GetxController {
           loadingMessage.afterVerify(
             "Message",
             "Well done Your account has been created ",
-            AppRouts.homeScreen,
+            AppRouts.signInScreen,
             {
               "email": emailController.text,
               "rout": "signup",
