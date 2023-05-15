@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,7 +36,11 @@ class HotelInfoCard extends StatelessWidget {
                 ClipRRect(
                   clipBehavior: Clip.antiAlias,
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(image,fit: BoxFit.fill,width: 80,),
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.fill,
+                    width: 80,
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -48,42 +48,39 @@ class HotelInfoCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Info(title: 'Name',data: name),
-                      Info(title: 'Address',data: address),
-                      Info(title: 'Phone',data: phone),
-                      Info(title: 'Rooms',data: "$rooms"),
-                      Info(title: 'Id',data: "$id"),
+                      Info(title: 'Name', data: name),
+                      Info(title: 'Address', data: address),
+                      Info(title: 'Phone', data: phone),
+                      Info(title: 'Rooms', data: "$rooms"),
+                      Info(title: 'Id', data: "$id"),
                     ],
                   ),
                 ),
-                const VerticalDivider(
-                  color: Colors.black,
-                  width: 2,
-                ),
                 Flexible(
-                    child: Container(
-                      alignment: Alignment.center,
-                      // color: Colors.blue,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Rate",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                          Text(
-                            "$rate",
-                            style: const TextStyle(fontSize: 25),
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.yellow[600],
-                          )
-                        ],
-                      ),
-                    ))
+                  child: Container(
+                    alignment: Alignment.center,
+                    // color: Colors.blue,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Rate",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        Text(
+                          "$rate",
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow[600],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -95,8 +92,10 @@ class HotelInfoCard extends StatelessWidget {
 
 class Info extends StatelessWidget {
   const Info({
-    super.key,required this.title,
-    required this.data, required ,
+    super.key,
+    required this.title,
+    required this.data,
+    required,
   });
 
   final String data;

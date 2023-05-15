@@ -1,6 +1,5 @@
 import 'package:batna_traveler/config/constants/app_colors.dart';
 import 'package:batna_traveler/controller/admin/admin_panel_controller.dart';
-import 'package:batna_traveler/view/admin/show_all_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +29,7 @@ class AdminPanel extends StatelessWidget {
             ),
             HomeScreenPanelCard(
               onTap: () {},
-              title: "Category's Config",
+              title: "Categories Config",
             ),
             HomeScreenPanelCard(
               onTap: () {},
@@ -48,7 +47,7 @@ class AdminPanel extends StatelessWidget {
               ),
             ),
             Text(
-              "All Category's",
+              "All Categories",
               style:
                   Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
             ),
