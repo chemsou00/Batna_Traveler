@@ -1,10 +1,16 @@
 import 'dart:developer';
 
+import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:batna_traveler/view/components/custom_drawer.dart';
 import 'package:batna_traveler/view/components/home_widgets.dart';
 import 'package:batna_traveler/view/components/search_bar.dart';
 import 'package:batna_traveler/view/components/spacer_between-categories.dart';
+import 'package:batna_traveler/view/screens/events_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+List<IconData> myIcons= [Icons.hotel,Icons.restaurant,Icons.beach_access,Icons.spa,Icons.landscape,Icons.restaurant,Icons.hotel_outlined];
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -41,14 +47,16 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: 80,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    CategoryCard(
-                      title: "Hotels",
-                      onPressed: () {},
-                    ),
-                  ],
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: category.length,
+                  itemBuilder: (context,index)=>CategoryCard(
+                    iconData: myIcons[index],
+                    index: index,
+                    title: "Hotels",
+                    onPressed: () {},
+                  ),
                 ),
               ),
               SpacerBetween(
@@ -57,14 +65,15 @@ class HomeScreen extends StatelessWidget {
                     log('See all Events onTAPED');
                   }),
               Expanded(
-                child: GridView.count(
+                child: GridView.builder(
+                  itemCount: category.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 10.0,
+                  ),
                   physics: const BouncingScrollPhysics(),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: 2,
-                  children: const <Widget>[
-                    EventCard(),
-                  ],
+                  itemBuilder: (context,index)=>EventCard(onTap: (){Get.to(()=>EventScreen(index: index,));}),
                 ),
               ),
             ],

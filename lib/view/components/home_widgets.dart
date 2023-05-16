@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({
-    super.key,
+    super.key, this.onTap,
   });
 
+  final void Function()? onTap ;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,12 +18,12 @@ class EventCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Stack(
           fit: StackFit.expand,
           children: [
             Image.network(
-              'https://loveincorporated.blob.core.windows.net/contentimages/gallery/01f7fdd8-368c-41eb-817d-1bca7d873ccb-38-moraine-lake.jpg',
+              'https://assetsnffrgf-a.akamaihd.net/assets/m/2014888/univ/art/2014888_univ_cnt_2_xl.jpg',
               fit: BoxFit.cover,
             ),
             Positioned(
@@ -29,11 +31,41 @@ class EventCard extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
+                height: 70,
                 padding: const EdgeInsets.all(10),
                 color: Colors.black.withOpacity(0.6),
-                child: const Text(
-                    style: TextStyle(color: Colors.white),
-                    "He'd have you all unravel at the"),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Timgad",
+                            style: TextStyle(
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                          Text("Enjow with a journy to the",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.white,fontSize: 12),),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 50, width: 50,
+                      // color: Colors.green,
+                      child: const Text(
+                        "25\$",textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.yellowAccent,
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Positioned(
@@ -61,12 +93,13 @@ class CategoryCard extends StatelessWidget {
   const CategoryCard({
     super.key,
     required this.title,
-    this.onPressed,
+    this.onPressed,required this.index,required this.iconData,
   });
 
   final String title;
+  final int index;
   final void Function()? onPressed;
-
+  final IconData iconData ;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -78,8 +111,8 @@ class CategoryCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15))),
               padding: MaterialStateProperty.all(const EdgeInsets.all(20))),
           onPressed: onPressed,
-          icon: const Icon(Icons.hotel),
-          label: Text(title)),
+          icon: Icon(iconData),
+          label: Text(category[index])),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:batna_traveler/view/admin/widgets/restaurant_info_card.dart';
+import 'package:batna_traveler/view/admin/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,8 +54,18 @@ class ShowAllData extends StatelessWidget {
                           tables: 25,
                           id: 12,
                           rate: 3.8,
-                          image: "https://popmenucloud.com/cdn-cgi/image/width=1200,height=1200,fit=scale-down,format=auto,quality=60/ybtkwpfh/04ab0d84-f7b6-4fc3-b76d-34cb9a5fd35e.jpg");
-                    }return const SizedBox();
+                          image:
+                              "https://popmenucloud.com/cdn-cgi/image/width=1200,height=1200,fit=scale-down,format=auto,quality=60/ybtkwpfh/04ab0d84-f7b6-4fc3-b76d-34cb9a5fd35e.jpg");
+                    } else if (title == "Users") {
+                      return const UserInfoCard(
+                          name: "name",
+                          phone: "phone",
+                          email: "email",
+                          image: "image",
+                          id: 12,
+                          role: 1);
+                    }
+                    return const SizedBox();
                   }),
             ),
           ],
