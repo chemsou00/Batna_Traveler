@@ -27,7 +27,6 @@ class HotelInfoCard extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: SizedBox(
-          height: 100,
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.all(8.0),

@@ -6,6 +6,7 @@ import 'package:batna_traveler/view/screens/on_boarding.dart';
 import 'package:get/get.dart';
 
 import '../../core/middleware/my_middleware.dart';
+import '../../view/admin/event_config.dart';
 
 // Routs Class
 class AppRouts {
@@ -14,6 +15,7 @@ class AppRouts {
   static const String signInScreen = '/signInScreen';
   static const String signUpScreen = '/signUpScreen';
   static const String adminPanel = '/adminPanel';
+  static const String eventConfig = '/eventConfig';
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -25,4 +27,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRouts.signInScreen, page: () => const SignInScreen()),
   GetPage(name: AppRouts.signUpScreen, page: () => const SignUpScreen()),
   GetPage(name: AppRouts.adminPanel, page: () => const AdminPanel()),
+  GetPage(name: AppRouts.eventConfig, page: () => const EventConfig()),
 ];

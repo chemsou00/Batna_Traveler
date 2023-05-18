@@ -33,7 +33,9 @@ class AdminPanel extends StatelessWidget {
               title: "Categories Config",
             ),
             HomeScreenPanelCard(
-              onTap: () {},
+              onTap: () {
+                controller.gotoEventConfig();
+              },
               title: "Events Config",
             ),
             Text(
@@ -44,7 +46,7 @@ class AdminPanel extends StatelessWidget {
             Flexible(flex: 1,
               child: HomeScreenPanelCard(
                 onTap: () {
-                  Get.to(ShowAllData(),arguments: {
+                  Get.to(const ShowAllData(),arguments: {
                     "title" : "Users"
                   });
                 },

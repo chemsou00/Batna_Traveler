@@ -19,9 +19,7 @@ class UserInfoCard extends StatelessWidget {
       margin: const EdgeInsets.all(5.0),
       elevation: 3,
       child: SizedBox(
-          height: 100,
           child: Row(
-            
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 5.0),

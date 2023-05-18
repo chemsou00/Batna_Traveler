@@ -1,6 +1,7 @@
 
 
 
+import 'package:batna_traveler/config/routes/routs.dart';
 import 'package:batna_traveler/view/admin/show_all_data.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,9 @@ class AdminPanelController extends GetxController{
       "index": index,
     });
 
+  }
+  gotoEventConfig(){
+    Get.toNamed(AppRouts.eventConfig);
   }
 
 
