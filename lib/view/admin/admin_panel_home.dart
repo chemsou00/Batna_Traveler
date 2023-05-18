@@ -34,7 +34,10 @@ class AdminPanel extends StatelessWidget {
             ),
             HomeScreenPanelCard(
               onTap: () {
-                controller.gotoEventConfig();
+                // controller.gotoEventConfig();
+                Get.to(const ShowAllData(),arguments: {
+                  "title" : "Events"
+                });
               },
               title: "Events Config",
             ),

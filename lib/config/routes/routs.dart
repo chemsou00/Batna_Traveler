@@ -27,5 +27,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRouts.signInScreen, page: () => const SignInScreen()),
   GetPage(name: AppRouts.signUpScreen, page: () => const SignUpScreen()),
   GetPage(name: AppRouts.adminPanel, page: () => const AdminPanel()),
-  GetPage(name: AppRouts.eventConfig, page: () => const EventConfig()),
+  GetPage(name: AppRouts.eventConfig, page: () => const EventAdd()),
 ];

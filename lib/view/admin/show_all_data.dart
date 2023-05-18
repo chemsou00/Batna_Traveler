@@ -1,9 +1,11 @@
+import 'package:batna_traveler/view/admin/event_config.dart';
 import 'package:batna_traveler/view/admin/widgets/restaurant_info_card.dart';
 import 'package:batna_traveler/view/admin/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../components/search_bar.dart';
+import 'widgets/events_info_card.dart';
 import 'widgets/hotel_info_card.dart';
 
 class ShowAllData extends StatelessWidget {
@@ -13,8 +15,11 @@ class ShowAllData extends StatelessWidget {
   Widget build(BuildContext context) {
     var title = Get.arguments["title"];
     return Scaffold(
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            buildShowModalBottomSheet(context, title);
+          },
+          child: const Icon(Icons.add)),
       appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.transparent,
@@ -64,6 +69,8 @@ class ShowAllData extends StatelessWidget {
                           image: "image",
                           id: 12,
                           role: 1);
+                    } else if (title == "Events") {
+                      return const EventInfoCard();
                     }
                     return const SizedBox();
                   }),
@@ -72,5 +79,26 @@ class ShowAllData extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<dynamic> buildShowModalBottomSheet(
+      BuildContext context, String? title) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          if (title == "Hotel") {
+            return const Center(child: Text("Add Hotel"));
+          } else if (title == "Restaurant") {
+            return const Center(child: Text("Add Restaurant"));
+          }
+          else if (title == "Users") {
+            return const Center(child: Text("Add User"));
+          }
+          else if (title == "Events") {
+            return const EventAdd();
+          }
+          return const SizedBox();
+        });
   }
 }
