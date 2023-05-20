@@ -1,14 +1,17 @@
 import 'dart:developer';
 
 import 'package:batna_traveler/view/admin/admin_panel_home.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({
-    super.key, this.onTap,
+    super.key,
+    this.onTap,
   });
 
-  final void Function()? onTap ;
+  final void Function()? onTap;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -22,9 +25,23 @@ class EventCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              'https://assetsnffrgf-a.akamaihd.net/assets/m/2014888/univ/art/2014888_univ_cnt_2_xl.jpg',
-              fit: BoxFit.cover,
+            CachedNetworkImage(
+              imageUrl:
+                  'https://assetsnffrgf-a.akamaihd.net/assets/m/2014888/univ/art/2014888_univ_cnt_2_xl.jpg',
+              placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                strokeWidth: 1.5,
+              )),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              imageBuilder: (context, imageProvider) => Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,),
+                ),
+              ),
             ),
             Positioned(
               bottom: 0,
@@ -34,7 +51,8 @@ class EventCard extends StatelessWidget {
                 height: 70,
                 padding: const EdgeInsets.all(10),
                 color: Colors.black.withOpacity(0.6),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       child: Column(
@@ -47,9 +65,11 @@ class EventCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           ),
-                          Text("Enjow with a journy to the",
+                          Text(
+                            "Enjow with a journy to the",
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.white,fontSize: 12),),
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
                         ],
                       ),
                     ),
@@ -58,10 +78,12 @@ class EventCard extends StatelessWidget {
                       height: 50, width: 50,
                       // color: Colors.green,
                       child: const Text(
-                        "25\$",textAlign: TextAlign.center,
+                        "25\$",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.yellowAccent,
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            color: Colors.yellowAccent,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
                     )
                   ],
@@ -93,13 +115,16 @@ class CategoryCard extends StatelessWidget {
   const CategoryCard({
     super.key,
     required this.title,
-    this.onPressed,required this.index,required this.iconData,
+    this.onPressed,
+    required this.index,
+    required this.iconData,
   });
 
   final String title;
   final int index;
   final void Function()? onPressed;
-  final IconData iconData ;
+  final IconData iconData;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

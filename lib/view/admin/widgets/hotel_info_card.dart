@@ -5,7 +5,7 @@ class HotelInfoCard extends StatelessWidget {
   final String name, address, phone, image;
   final int rooms, id;
   final double rate;
-
+  final int index ;
   const HotelInfoCard({
     super.key,
     required this.name,
@@ -14,7 +14,7 @@ class HotelInfoCard extends StatelessWidget {
     required this.rooms,
     required this.id,
     required this.rate,
-    required this.image,
+    required this.image,required this.index,
   });
 
   @override
@@ -32,54 +32,47 @@ class HotelInfoCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                ClipRRect(
-                  clipBehavior: Clip.antiAlias,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    image,
-                    fit: BoxFit.fill,
-                    width: 80,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  width: Get.size.width * 0.5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Info(title: 'Name', data: name),
-                      Info(title: 'Address', data: address),
-                      Info(title: 'Phone', data: phone),
-                      Info(title: 'Rooms', data: "$rooms"),
-                      Info(title: 'Id', data: "$id"),
-                    ],
-                  ),
+                Image.network(
+                  image,
+                  fit: BoxFit.fill,
+                  width: 80,height: 80,
                 ),
                 Flexible(
-                  child: Container(
-                    alignment: Alignment.center,
-                    // color: Colors.blue,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Rate",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        Text(
-                          "$rate",
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[600],
-                        )
+                        Info(title: 'Name', data: name),
+                        Info(title: 'Address', data: address),
+                        Info(title: 'Phone', data: phone),
+                        Info(title: 'Rooms', data: "$rooms"),
+                        Info(title: 'Id', data: "$id"),
                       ],
                     ),
                   ),
                 ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Rate",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    Text(
+                      "$rate",
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow[600],
+                    )
+                  ],
+                ),
+              IconButton(onPressed: (){
+                print("Delete In index $index");
+              }, icon: const Icon(Icons.delete))
               ],
             ),
           ),

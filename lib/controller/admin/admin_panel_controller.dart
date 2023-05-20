@@ -16,7 +16,7 @@ class AdminPanelController extends GetxController{
 
   }
   gotoEventConfig(){
-    Get.toNamed(AppRouts.eventConfig);
+    Get.toNamed(AppRouts.addNewData);
   }
 
 

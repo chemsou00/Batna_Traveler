@@ -12,8 +12,10 @@ class EventInfoCard extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(left: 5),
-              width: 80,color: Colors.redAccent,
+              width: 80,
+              color: Colors.grey,
               height: 80,
+              child: const Icon(Icons.image,size: 50),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

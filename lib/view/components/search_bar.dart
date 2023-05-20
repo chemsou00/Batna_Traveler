@@ -14,6 +14,7 @@ class SearchBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: TextFormField(
+          enabled: false,
           decoration: searchField.copyWith(),
         ),
       ),

@@ -23,8 +23,8 @@ class UserInfoCard extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                height: 90,
-                width: 90,
+                height: 80,
+                width: 80,
                 color: Colors.grey,child: const Icon(Icons.person,size: 50,),
               ),
               Column(
@@ -39,7 +39,7 @@ class UserInfoCard extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const Icon(Icons.more_vert)
+              IconButton(onPressed: (){}, icon: const Icon(Icons.delete))
             ],
           )),
     );

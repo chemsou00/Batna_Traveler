@@ -1,4 +1,4 @@
-import 'package:batna_traveler/controller/admin/event_config_controller.dart';
+import 'package:batna_traveler/controller/admin/event_controller.dart';
 import 'package:batna_traveler/view/admin/functions/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

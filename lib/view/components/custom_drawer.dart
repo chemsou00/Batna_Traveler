@@ -16,7 +16,8 @@ class CustomDrawer extends StatelessWidget {
             accountName: Text(
                 "User name : ${controller.username} \nRole : ${controller.role}"),
             accountEmail: Text("Email : ${controller.email}"),
-            currentAccountPicture: const Icon(Icons.person),
+            currentAccountPicture: const Icon(Icons.person,size: 60,),
+            decoration: const BoxDecoration(color: Colors.white,),
             currentAccountPictureSize: const Size(40, 40),
           ),
           ListTile(
