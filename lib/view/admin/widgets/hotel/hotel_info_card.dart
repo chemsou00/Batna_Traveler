@@ -5,7 +5,10 @@ class HotelInfoCard extends StatelessWidget {
   final String name, address, phone, image;
   final int rooms, id;
   final double rate;
-  final int index ;
+  final int index;
+
+  final bool isAdmin;
+
   const HotelInfoCard({
     super.key,
     required this.name,
@@ -14,7 +17,9 @@ class HotelInfoCard extends StatelessWidget {
     required this.rooms,
     required this.id,
     required this.rate,
-    required this.image,required this.index,
+    required this.image,
+    required this.index,
+    this.isAdmin = false,
   });
 
   @override
@@ -27,15 +32,16 @@ class HotelInfoCard extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: SizedBox(
-          width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              //mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Image.network(
                   image,
                   fit: BoxFit.fill,
-                  width: 80,height: 80,
+                  width: 80,
+                  height: 80,
                 ),
                 Flexible(
                   child: Padding(
@@ -53,12 +59,11 @@ class HotelInfoCard extends StatelessWidget {
                   ),
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
                       "Rate",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     Text(
                       "$rate",
@@ -70,9 +75,13 @@ class HotelInfoCard extends StatelessWidget {
                     )
                   ],
                 ),
-              IconButton(onPressed: (){
-                print("Delete In index $index");
-              }, icon: const Icon(Icons.delete))
+                isAdmin
+                    ? IconButton(
+                        onPressed: () {
+                          print("Delete In index $index");
+                        },
+                        icon: const Icon(Icons.delete))
+                    : const SizedBox(width: 10,)
               ],
             ),
           ),

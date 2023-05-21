@@ -1,4 +1,6 @@
 import 'package:batna_traveler/controller/admin/event_controller.dart';
+import 'package:batna_traveler/controller/admin/hotel_controller.dart';
+import 'package:batna_traveler/controller/admin/restaurant_controller.dart';
 import 'package:batna_traveler/view/admin/widgets/hotel/hotel_add.dart';
 import 'package:batna_traveler/view/admin/widgets/restaurant/restaurant_add.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +29,11 @@ Widget widgetData (String title){
     Get.put(EventConfigController());
     return AddEvent(controller: Get.find());
   }else if(title == "Hotel"){
-    return const AddHotel();
+    Get.put(HotelController());
+    return AddHotel(controller: Get.find(),);
   }else if(title == "Restaurant"){
-    return const AddRestaurant();
+    Get.put(RestaurantController());
+    return AddRestaurant(controller : Get.find());
   }
   return const SizedBox();
 }

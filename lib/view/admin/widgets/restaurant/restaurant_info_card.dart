@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +5,7 @@ class RestaurantInfoCard extends StatelessWidget {
   final String name, address, phone, image;
   final int tables, id;
   final double rate;
+  final bool isAdmin;
 
   const RestaurantInfoCard({
     super.key,
@@ -19,6 +16,7 @@ class RestaurantInfoCard extends StatelessWidget {
     required this.id,
     required this.rate,
     required this.image,
+    this.isAdmin = false,
   });
 
   @override
@@ -34,19 +32,25 @@ class RestaurantInfoCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.network(image,fit: BoxFit.fill,width: 80,height: 80,),
+                Image.network(
+                  image,
+                  fit: BoxFit.fill,
+                  width: 80,
+                  height: 80,
+                ),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Info(title: 'Name',data: name),
-                        Info(title: 'Address',data: address),
-                        Info(title: 'Phone',data: phone),
-                        Info(title: 'tables',data: "$tables"),
-                        Info(title: 'Id',data: "$id"),
+                        Info(title: 'Name', data: name),
+                        Info(title: 'Address', data: address),
+                        Info(title: 'Phone', data: phone),
+                        Info(title: 'tables', data: "$tables"),
+                        Info(title: 'Id', data: "$id"),
                       ],
                     ),
                   ),
@@ -56,8 +60,8 @@ class RestaurantInfoCard extends StatelessWidget {
                   children: [
                     const Text(
                       "Rate",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     Text(
                       "$rate",
@@ -69,7 +73,10 @@ class RestaurantInfoCard extends StatelessWidget {
                     )
                   ],
                 ),
-                IconButton(onPressed: (){},   icon: const Icon(Icons.delete))
+                isAdmin
+                    ? IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.delete))
+                    : const SizedBox(width: 10,),
               ],
             ),
           ),
@@ -81,18 +88,20 @@ class RestaurantInfoCard extends StatelessWidget {
 
 class Info extends StatelessWidget {
   const Info({
-  super.key,required this.title,
-  required this.data, required ,
-});
+    super.key,
+    required this.title,
+    required this.data,
+    required,
+  });
 
-final String data;
-final String title;
+  final String data;
+  final String title;
 
-@override
-Widget build(BuildContext context) {
-  return Text(
-    "$title : $data ",
-    overflow: TextOverflow.ellipsis,
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "$title : $data ",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }

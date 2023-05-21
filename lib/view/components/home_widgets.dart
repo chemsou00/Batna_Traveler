@@ -114,13 +114,11 @@ class EventCard extends StatelessWidget {
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
     super.key,
-    required this.title,
     this.onPressed,
     required this.index,
     required this.iconData,
   });
 
-  final String title;
   final int index;
   final void Function()? onPressed;
   final IconData iconData;

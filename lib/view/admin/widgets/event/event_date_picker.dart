@@ -22,31 +22,33 @@ class EventDatePicker extends StatelessWidget {
         children: [
           ElevatedButton(
               onPressed: () async {
-                controller.dateStartTime =
-                    await datePick(context) ?? controller.dateStartTime;
-                print(controller.dateStartTime);
+                DateTime date =
+                    await datePick(context) ?? DateTime.now();
+                controller.dateStart =
+                    DateFormat("yyy-MM-dd").format(date);
                 controller.update();
               },
               child: const Text("Date Start")),
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
             child: Text(
-              DateFormat("yyy-MM-dd").format(controller.dateStartTime),
+              controller.dateStart,
               style: const TextStyle(fontSize: 15),
             ),
           ),
           ElevatedButton(
               onPressed: () async {
-                controller.dateEndTime =
-                    await datePick(context) ?? controller.dateEndTime;
-                print(controller.dateEndTime);
+                DateTime date =
+                    await datePick(context) ?? DateTime.now();
+                controller.dateEnd =
+                    DateFormat("yyy-MM-dd").format(date);
                 controller.update();
               },
               child: const Text("Date End")),
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
             child: Text(
-              DateFormat("yyy-MM-dd").format(controller.dateEndTime),
+              controller.dateEnd,
               style: const TextStyle(fontSize: 15),
             ),
           ),

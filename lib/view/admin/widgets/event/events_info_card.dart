@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class EventInfoCard extends StatelessWidget {
-  const EventInfoCard({Key? key}) : super(key: key);
-
+  const EventInfoCard({Key? key,this.isAdmin = false}) : super(key: key);
+  final bool isAdmin ;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,7 +31,7 @@ class EventInfoCard extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
+            isAdmin ? IconButton(onPressed: () {}, icon: const Icon(Icons.delete)) : const SizedBox(),
           ],
         ),
       ),

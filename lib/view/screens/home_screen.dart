@@ -7,6 +7,7 @@ import 'package:batna_traveler/view/components/home_widgets.dart';
 import 'package:batna_traveler/view/components/search_bar.dart';
 import 'package:batna_traveler/view/components/spacer_between-categories.dart';
 import 'package:batna_traveler/view/screens/events_screen.dart';
+import 'package:batna_traveler/view/screens/show_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,8 +56,11 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context,index)=>CategoryCard(
                     iconData: myIcons[index],
                     index: index,
-                    title: "Hotels",
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => const ShowData(),arguments: {
+                        "title" : category[index],
+                      });
+                    },
                   ),
                 ),
               ),

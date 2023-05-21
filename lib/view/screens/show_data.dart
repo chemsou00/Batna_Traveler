@@ -1,29 +1,19 @@
-import 'package:batna_traveler/config/routes/routs.dart';
 import 'package:batna_traveler/view/admin/widgets/restaurant/restaurant_info_card.dart';
 import 'package:batna_traveler/view/admin/widgets/users/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../admin/widgets/event/events_info_card.dart';
+import '../admin/widgets/hotel/hotel_info_card.dart';
 import '../components/search_bar.dart';
-import 'widgets/event/events_info_card.dart';
-import 'widgets/hotel/hotel_info_card.dart';
 
-class ShowAllData extends StatelessWidget {
-  const ShowAllData({Key? key}) : super(key: key);
+class ShowData extends StatelessWidget {
+  const ShowData({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var title = Get.arguments["title"];
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Get.toNamed(AppRouts.addNewData, arguments: {
-            "title": title,
-          });
-        },
-        icon: const Icon(Icons.add),
-        label: const Text('Create'),
-      ),
       appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.transparent,
@@ -50,10 +40,10 @@ class ShowAllData extends StatelessWidget {
                     itemBuilder: (context, index) {
                       if (title == "Hotel") {
                         return HotelInfoCard(
-                          isAdmin: true,
+                          isAdmin: false,
                           index: index,
                           name: "jawhara",
-                          address: "Alger 1er November",
+                          address: "Alger 1er November dfgdgsf",
                           image:
                               "https://th.bing.com/th/id/OIP.lt8QrXojtriF3zjsuPUXrgHaFj?pid=ImgDet&rs=1",
                           phone: "033556699",
@@ -63,9 +53,8 @@ class ShowAllData extends StatelessWidget {
                         );
                       } else if (title == "Restaurant") {
                         return const RestaurantInfoCard(
-                            isAdmin: true,
                             name: "elmorjan",
-                            address: "Boumerdas sqdhgqsqdhgsdhg",
+                            address: "Boumerdas sqdhg qsq dhgsdhg",
                             phone: "044774455",
                             tables: 25,
                             id: 12,
@@ -81,7 +70,7 @@ class ShowAllData extends StatelessWidget {
                             id: 12,
                             role: 1);
                       } else if (title == "Events") {
-                        return const EventInfoCard(isAdmin: true,);
+                        return const EventInfoCard();
                       }
                       return const SizedBox();
                     }),
