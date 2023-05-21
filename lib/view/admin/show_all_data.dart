@@ -1,14 +1,12 @@
 import 'package:batna_traveler/config/routes/routs.dart';
-import 'package:batna_traveler/controller/admin/event_controller.dart';
-import 'package:batna_traveler/view/admin/add_screen.dart';
-import 'package:batna_traveler/view/admin/widgets/restaurant_info_card.dart';
-import 'package:batna_traveler/view/admin/widgets/user_card.dart';
+import 'package:batna_traveler/view/admin/widgets/restaurant/restaurant_info_card.dart';
+import 'package:batna_traveler/view/admin/widgets/users/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../components/search_bar.dart';
-import 'widgets/events_info_card.dart';
-import 'widgets/hotel_info_card.dart';
+import 'widgets/event/events_info_card.dart';
+import 'widgets/hotel/hotel_info_card.dart';
 
 class ShowAllData extends StatelessWidget {
   const ShowAllData({Key? key}) : super(key: key);
@@ -17,13 +15,15 @@ class ShowAllData extends StatelessWidget {
   Widget build(BuildContext context) {
     var title = Get.arguments["title"];
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed(AppRouts.addNewData, arguments: {
-              "title": title,
-            });
-          },
-          child: const Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.toNamed(AppRouts.addNewData, arguments: {
+            "title": title,
+          });
+        },
+        icon: const Icon(Icons.add),
+        label: const Text('Create'),
+      ),
       appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.transparent,
