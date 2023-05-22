@@ -31,7 +31,7 @@ class HotelInfoCard extends StatelessWidget {
                   width: 80,
                   height: 80,
                 ),
-                Flexible(
+                Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
