@@ -8,9 +8,14 @@ class EventCard extends StatelessWidget {
   const EventCard({
     super.key,
     this.onTap,
+  required this.title,
+  required this.content,
+  required this.image,
+  required this.price,
   });
 
   final void Function()? onTap;
+  final String title,content,image,price;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class EventCard extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl:
-                  'https://assetsnffrgf-a.akamaihd.net/assets/m/2014888/univ/art/2014888_univ_cnt_2_xl.jpg',
+                  image,
               placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
                 strokeWidth: 1.5,
@@ -57,16 +62,18 @@ class EventCard extends StatelessWidget {
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
-                            "Timgad",
+                            title,
+                            maxLines: 1,
                             style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
                                 color: Colors.cyan,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           ),
                           Text(
-                            "Enjow with a journy to the",
+                            content,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
@@ -77,8 +84,9 @@ class EventCard extends StatelessWidget {
                       alignment: Alignment.center,
                       height: 50, width: 50,
                       // color: Colors.green,
-                      child: const Text(
-                        "25\$",
+                      child: Text(
+                        "$price \$",
+                        overflow: TextOverflow.fade,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.yellowAccent,
@@ -116,12 +124,13 @@ class CategoryCard extends StatelessWidget {
     super.key,
     this.onPressed,
     required this.index,
-    required this.iconData,
+    required this.iconData, required this.title,
   });
 
   final int index;
   final void Function()? onPressed;
   final IconData iconData;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +144,7 @@ class CategoryCard extends StatelessWidget {
               padding: MaterialStateProperty.all(const EdgeInsets.all(20))),
           onPressed: onPressed,
           icon: Icon(iconData),
-          label: Text(category[index])),
+          label: Text(title)),
     );
   }
 }
