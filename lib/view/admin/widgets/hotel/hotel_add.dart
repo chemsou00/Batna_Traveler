@@ -76,7 +76,7 @@ class AddHotel extends StatelessWidget {
                 },
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
-                // controller: roomsController.toInt(),
+                controller: controller.rateController,
                 decoration: const InputDecoration(
                   labelText: 'Rate',
                   border: OutlineInputBorder(),

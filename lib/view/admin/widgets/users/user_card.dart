@@ -1,47 +1,78 @@
 import 'package:flutter/material.dart';
 
 class UserInfoCard extends StatelessWidget {
-  const UserInfoCard(
-      {Key? key,
-      required this.name,
-      required this.phone,
-      required this.email,
-      required this.image,
-      required this.id,
-      required this.role})
-      : super(key: key);
-  final String name, phone, email, image;
-  final int id, role;
+  const UserInfoCard({
+    Key? key,
+    required this.data,
+    required this.index,
+    this.isAdmin = true,
+  }) : super(key: key);
+  final List data;
+
+  final int index;
+  final bool isAdmin;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(5.0),
       elevation: 3,
-      child: SizedBox(
-          child: Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                height: 80,
-                width: 80,
-                color: Colors.grey,child: const Icon(Icons.person,size: 50,),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {},
+        child: Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 5),
+              width: 80,
+              color: Colors.grey,
+              height: 80,
+              child: Icon(
+                Icons.person,
+                size: 50,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("User Name : "),
-                  Text("User email : "),
-                  Text("User phone : "),
-                  Text("User id : "),
-                  Text("User role : "),
-                ],
+            ),
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Info(title: 'name', data: data[index]["user_name"]),
+                    Info(title: 'email', data: data[index]["user_email"]),
+                    Info(title: 'phone', data: data[index]["user_phone"]),
+                    Info(title: 'role', data: (data[index]["user_role"]== 1)?"Admin" : "Normal"),
+                    Info(title: 'id', data: data[index]["user_id"].toString()),
+                  ],
+                ),
               ),
-              const Spacer(),
-              IconButton(onPressed: (){}, icon: const Icon(Icons.delete))
-            ],
-          )),
+            ),
+            isAdmin
+                ? IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
+                : const SizedBox(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Info extends StatelessWidget {
+  const Info({
+    super.key,
+    required this.title,
+    required this.data,
+    required,
+  });
+
+  final String data;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "$title : $data ",
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

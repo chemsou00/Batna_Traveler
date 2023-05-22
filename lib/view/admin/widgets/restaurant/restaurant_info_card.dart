@@ -2,21 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RestaurantInfoCard extends StatelessWidget {
-  final String name, address, phone, image;
-  final int tables, id;
-  final double rate;
+  final List data ;
   final bool isAdmin;
+  final int index ;
 
   const RestaurantInfoCard({
     super.key,
-    required this.name,
-    required this.address,
-    required this.phone,
-    required this.tables,
-    required this.id,
-    required this.rate,
-    required this.image,
-    this.isAdmin = false,
+    this.isAdmin = false, required this.data, required this.index,
   });
 
   @override
@@ -35,7 +27,7 @@ class RestaurantInfoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.network(
-                  image,
+                  data[index]["r_image"],
                   fit: BoxFit.fill,
                   width: 80,
                   height: 80,
@@ -46,11 +38,11 @@ class RestaurantInfoCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Info(title: 'Name', data: name),
-                        Info(title: 'Address', data: address),
-                        Info(title: 'Phone', data: phone),
-                        Info(title: 'tables', data: "$tables"),
-                        Info(title: 'Id', data: "$id"),
+                        Info(title: 'Name', data: data[index]["r_name"]),
+                        Info(title: 'Address', data: data[index]["r_address"]),
+                        Info(title: 'Phone', data: data[index]["r_phone"]),
+                        Info(title: 'tables', data: data[index]["r_number_tabels"].toString()),
+                        Info(title: 'Id', data: data[index]["r_id"].toString()),
                       ],
                     ),
                   ),
@@ -64,7 +56,7 @@ class RestaurantInfoCard extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     Text(
-                      "$rate",
+                      data[index]["r_rank"].toString(),
                       style: const TextStyle(fontSize: 14),
                     ),
                     Icon(

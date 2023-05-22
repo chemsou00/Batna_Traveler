@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:batna_traveler/config/constants/app_colors.dart';
-import 'package:batna_traveler/controller/home_controller.dart';
+import 'package:batna_traveler/controller/show_data_controller.dart';
 import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:batna_traveler/view/components/custom_drawer.dart';
 import 'package:batna_traveler/view/components/home_widgets.dart';
@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                             );
                           }
                           return Center(
-                              child: Text("Error Check Internet Or Server"));
+                              child: Text('Error: ${snapshot.error}'));
                         }),
                   ),
                   SpacerBetween(
@@ -103,51 +103,61 @@ class HomeScreen extends StatelessWidget {
                   Expanded(
                     child: RefreshIndicator(
                       backgroundColor: AppColors.kSecandaryColor,
-                      onRefresh: () async {
-                        await controller.refreshHome();
+                      onRefresh: ()async  {
+                         await controller.refreshScreen();
                       },
                       child: FutureBuilder(
-                          future: controller.getEvents(),
-                          builder: (context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              List<dynamic> data = snapshot.data["data"];
-                              return GridView.builder(
-                                itemCount: data.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 10.0,
-                                  mainAxisSpacing: 10.0,
-                                ),
-                                // physics: const BouncingScrollPhysics(),
-                                itemBuilder: (context, index) => EventCard(
-                                    title: data[index]["event_title"],
-                                    content: data[index]["event_content"],
-                                    image: data[index]["event_image"],
-                                    price: data[index]["event_price"],
-                                    onTap: () {
-                                      Get.to(
-                                        () => EventScreen(
-                                          title: data[index]["event_title"],
-                                          content: data[index]["event_content"],
-                                          image: data[index]["event_image"],
-                                          price: data[index]["event_price"],
-                                          dateStart: data[index]["event_start"],
-                                          dateEnd: data[index]["event_end"],
-                                        ),
-                                      );
-                                    }),
-                              );
-                            }
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
+                        future: controller.getEvents(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return Center(
-                                child: Text("Error Connection Or Server"));
-                          }),
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          if (snapshot.hasData) {
+                            List<dynamic> data = snapshot.data["data"];
+                            return GridView.builder(
+                              itemCount: data.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10.0,
+                                mainAxisSpacing: 10.0,
+                              ),
+                              // physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) => EventCard(
+                                  title: data[index]["event_title"],
+                                  content: data[index]["event_content"],
+                                  image: data[index]["event_image"],
+                                  price: data[index]["event_price"],
+                                  onTap: () {
+                                    Get.to(
+                                      () => EventScreen(
+                                        title: data[index]["event_title"],
+                                        content: data[index]["event_content"],
+                                        image: data[index]["event_image"],
+                                        price: data[index]["event_price"],
+                                        dateStart: data[index]["event_start"],
+                                        dateEnd: data[index]["event_end"],
+                                      ),
+                                    );
+                                  }),
+                            );
+                          }
+                          return Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text('Error: ${snapshot.error}'),
+                              IconButton(
+                                  onPressed: () {
+                                    controller.update();
+                                  }, icon: Icon(Icons.refresh,color: Colors.cyan,))
+                            ],
+                          ),);
+                        },
+                      ),
                     ),
                   ),
                 ],

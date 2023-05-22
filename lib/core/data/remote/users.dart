@@ -1,17 +1,16 @@
 import 'package:batna_traveler/config/constants/api.dart';
 import 'package:batna_traveler/core/class/crud.dart';
 
-class HotelData {
+class UserData {
   Crud crud;
 
-  HotelData(this.crud);
+  UserData(this.crud);
 
   postData(String name,
       String address,
       String phone,
       String rooms,
-      String rank,
-      ) async {
+      String rank,) async {
     var response = await crud.postData(AppLink.hotelCreate, {
       "name": name,
       "address": address,
@@ -24,19 +23,19 @@ class HotelData {
 }
 
 
-class HotelReadData {
+class UserReadData {
   Crud crud;
-  HotelReadData(this.crud);
+  UserReadData(this.crud);
   postData() async {
     var response = await crud.postData(AppLink.hotelRead, {});
     return response.fold((l) => l, (r) => r);
   }
 }
 
-class HotelDeleteData {
+class UserDeleteData {
   Crud crud;
 
-  HotelDeleteData(this.crud);
+  UserDeleteData(this.crud);
 
   postData(String id) async {
     var response = await crud.postData(AppLink.hotelDelete, {

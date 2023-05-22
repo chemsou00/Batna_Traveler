@@ -10,13 +10,14 @@ class RestaurantData {
   postData(String name,
       String address,
       String phone,
-      String rooms,
-      String rank,) async {
-    var response = await crud.postData(AppLink.hotelCreate, {
+      String tables,
+      String rank
+      ) async {
+    var response = await crud.postData(AppLink.restaurantCreate, {
       "name": name,
       "address": address,
       "phone": phone,
-      "rooms": rooms,
+      "tables": tables,
       "rank": rank
     });
     return response.fold((l) => l, (r) => r);
