@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:batna_traveler/config/constants/app_colors.dart';
-import 'package:batna_traveler/controller/show_data_controller.dart';
+import 'package:batna_traveler/controller/home_controller.dart';
 import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:batna_traveler/view/components/custom_drawer.dart';
 import 'package:batna_traveler/view/components/home_widgets.dart';

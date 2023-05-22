@@ -29,7 +29,7 @@ class RestaurantReadData {
   Crud crud;
   RestaurantReadData(this.crud);
   postData() async {
-    var response = await crud.postData(AppLink.hotelRead, {});
+    var response = await crud.postData(AppLink.restaurantRead, {});
     return response.fold((l) => l, (r) => r);
   }
 }
@@ -40,7 +40,7 @@ class RestaurantDeleteData {
   RestaurantDeleteData(this.crud);
 
   postData(String id) async {
-    var response = await crud.postData(AppLink.hotelDelete, {
+    var response = await crud.postData(AppLink.restaurantDelete, {
       "id": id
     });
     return response.fold((l) => l, (r) => r);

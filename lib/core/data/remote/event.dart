@@ -40,7 +40,7 @@ class EventDeleteData {
   EventDeleteData(this.crud);
   postData(String id,
       ) async {
-    var response = await crud.postData(AppLink.eventRead,{
+    var response = await crud.postData(AppLink.eventDelete,{
       "id" : id
     });
     return response.fold((l) => l, (r) => r);

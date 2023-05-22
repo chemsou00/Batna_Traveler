@@ -83,12 +83,14 @@ class AddHotel extends StatelessWidget {
                   prefixIcon: Icon(Icons.star_rate),
                 ),
               ),
+              const SizedBox(height: 16.0),
               SizedBox(
                 height: 50,
                 width: 100,
                 child: ElevatedButton(
                   onPressed: () {
                     controller.onSubmition();
+                    controller.clearFields();
                   },
                   child: const Text('Submit'),
                 ),

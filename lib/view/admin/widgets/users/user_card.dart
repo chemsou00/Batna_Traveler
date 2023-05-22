@@ -1,3 +1,4 @@
+import 'package:batna_traveler/controller/admin/users_controller.dart';
 import 'package:flutter/material.dart';
 
 class UserInfoCard extends StatelessWidget {
@@ -6,11 +7,13 @@ class UserInfoCard extends StatelessWidget {
     required this.data,
     required this.index,
     this.isAdmin = true,
+    required this.controller,
   }) : super(key: key);
   final List data;
 
   final int index;
   final bool isAdmin;
+  final UsersController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +44,25 @@ class UserInfoCard extends StatelessWidget {
                     Info(title: 'name', data: data[index]["user_name"]),
                     Info(title: 'email', data: data[index]["user_email"]),
                     Info(title: 'phone', data: data[index]["user_phone"]),
-                    Info(title: 'role', data: (data[index]["user_role"]== 1)?"Admin" : "Normal"),
+                    Info(
+                        title: 'role',
+                        data: (data[index]["user_role"] == 1)
+                            ? "Admin"
+                            : "Normal"),
                     Info(title: 'id', data: data[index]["user_id"].toString()),
                   ],
                 ),
               ),
             ),
             isAdmin
-                ? IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
+                ? IconButton(
+                    onPressed: () {
+                      controller.showDeleteAlert(
+                        data[index]["user_id"],
+                        data[index]["user_name"],
+                      );
+                    },
+                    icon: const Icon(Icons.delete))
                 : const SizedBox(),
           ],
         ),

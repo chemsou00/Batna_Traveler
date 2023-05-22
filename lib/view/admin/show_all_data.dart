@@ -1,10 +1,14 @@
+import 'package:batna_traveler/controller/admin/hotel_controller.dart';
+import 'package:batna_traveler/controller/admin/restaurant_controller.dart';
 import 'package:batna_traveler/view/admin/widgets/restaurant/restaurant_info_card.dart';
 import 'package:batna_traveler/view/admin/widgets/users/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../config/routes/routs.dart';
-import '../../controller/hotel_controller.dart';
+import '../../controller/admin/event_controller.dart';
+import '../../controller/admin/users_controller.dart';
+import '../../controller/show_data_controller.dart';
 import '../components/search_bar.dart';
 import 'widgets/event/events_info_card.dart';
 import 'widgets/hotel/hotel_info_card.dart';
@@ -58,27 +62,35 @@ class ShowAllData extends StatelessWidget {
                           return Center(child: CircularProgressIndicator());
                         }
                         if (snapshot.hasData) {
-                          List<dynamic> data = snapshot.data["data"];
+                          List<dynamic> data = snapshot.data["data"] ?? [];
                           print(data);
                           return ListView.builder(
                               itemCount: data.length,
                               itemBuilder: (context, index) {
                                 if (title == "Hotel") {
+                                  Get.put(HotelController());
                                   return HotelInfoCard(
+                                    controller: Get.find(),
                                     data: data,
                                     isAdmin: true,
                                     index: index,
                                   );
                                 } else if (title == "Restaurant") {
+                                  Get.put(RestaurantController());
                                   return RestaurantInfoCard(
+                                    controller: Get.find(),
                                       isAdmin: true, index: index, data: data);
                                 } else if (title == "Users") {
+                                  Get.put(UsersController());
                                   return UserInfoCard(
+                                    controller : Get.find(),
                                     data : data ,
                                     index : index,
                                   );
                                 } else if (title == "Events") {
+                                  Get.put(EventConfigController());
                                   return EventInfoCard(
+                                    controller : Get.find(),
                                     data: data,
                                     index: index,
                                     isAdmin: true,
@@ -98,19 +110,3 @@ class ShowAllData extends StatelessWidget {
     );
   }
 }
-
-// toNewDataPage(String title){
-//   if (title == "Hotel") {
-//     return const Center(child: Text("Add Hotel"));
-//   } else if (title == "Restaurant") {
-//     return const Center(child: Text("Add Restaurant"));
-//   }
-//   else if (title == "Users") {
-//     return const Center(child: Text("Add User"));
-//   }
-//   if (title == "Events") {
-//     Get.put(EventConfigController());
-//     return EventAdd(controller: Get.find());
-//   }
-//   return const SizedBox();
-// }

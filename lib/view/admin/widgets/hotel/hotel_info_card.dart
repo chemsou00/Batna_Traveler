@@ -1,13 +1,19 @@
+import 'package:batna_traveler/controller/admin/hotel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HotelInfoCard extends StatelessWidget {
   final bool isAdmin;
-  final List data ;
-  final int index ;
+  final List data;
+  final int index;
+  final HotelController controller;
+
   const HotelInfoCard({
     super.key,
-    this.isAdmin = false, required this.data, required this.index,
+    this.isAdmin = false,
+    required this.data,
+    required this.index,
+    required this.controller,
   });
 
   @override
@@ -37,11 +43,26 @@ class HotelInfoCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Info(title: 'Name', data: data[index]["h_name"],),
-                        Info(title: 'Address', data: data[index]["h_address"],),
-                        Info(title: 'Phone', data: data[index]["h_phone"].toString(),),
-                        Info(title: 'Rooms', data: data[index]["h_number_rooms"].toString(),),
-                        Info(title: 'Id', data: data[index]["h_id"].toString(),),
+                        Info(
+                          title: 'Name',
+                          data: data[index]["h_name"],
+                        ),
+                        Info(
+                          title: 'Address',
+                          data: data[index]["h_address"],
+                        ),
+                        Info(
+                          title: 'Phone',
+                          data: data[index]["h_phone"].toString(),
+                        ),
+                        Info(
+                          title: 'Rooms',
+                          data: data[index]["h_number_rooms"].toString(),
+                        ),
+                        Info(
+                          title: 'Id',
+                          data: data[index]["h_id"].toString(),
+                        ),
                       ],
                     ),
                   ),
@@ -54,7 +75,7 @@ class HotelInfoCard extends StatelessWidget {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                     Text(
-                        data[index]["h_rank"].toString(),
+                      data[index]["h_rank"].toString(),
                       style: const TextStyle(fontSize: 14),
                     ),
                     Icon(
@@ -66,10 +87,16 @@ class HotelInfoCard extends StatelessWidget {
                 isAdmin
                     ? IconButton(
                         onPressed: () {
-                          print("Delete In index $index");
+                          controller.showDeleteAlert(
+                            data[index]["h_id"],
+                            data[index]["h_name"],
+                          );
+                          //print("Delete In index $index");
                         },
                         icon: const Icon(Icons.delete))
-                    : const SizedBox(width: 10,)
+                    : const SizedBox(
+                        width: 10,
+                      )
               ],
             ),
           ),

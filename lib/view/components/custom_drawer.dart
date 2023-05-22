@@ -21,7 +21,9 @@ class CustomDrawer extends StatelessWidget {
             currentAccountPictureSize: const Size(40, 40),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
             title: const Text("Home"),
             leading: const Icon(Icons.home),
             trailing: const Icon(Icons.arrow_forward),
@@ -37,7 +39,11 @@ class CustomDrawer extends StatelessWidget {
                     }),
               ]),
           ListTile(
-            onTap: () {},
+            onTap: () async {
+              Get.back();
+              await Future.delayed(const Duration(milliseconds: 500));
+              Get.toNamed(AppRouts.favorite);
+            },
             title: const Text("Favorite"),
             leading: const Icon(Icons.favorite),
             trailing: const Icon(Icons.arrow_forward),

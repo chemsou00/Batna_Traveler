@@ -1,4 +1,6 @@
-import 'package:batna_traveler/controller/hotel_controller.dart';
+import 'package:batna_traveler/controller/admin/hotel_controller.dart';
+import 'package:batna_traveler/controller/admin/restaurant_controller.dart';
+import 'package:batna_traveler/controller/show_data_controller.dart';
 import 'package:batna_traveler/view/admin/widgets/restaurant/restaurant_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,23 +49,28 @@ class ShowData extends StatelessWidget {
                           return Center(child: CircularProgressIndicator());
                         }
                         if (snapshot.hasData) {
-                          List<dynamic> data = snapshot.data["data"];
+                          List<dynamic> data = snapshot.data["data"] ?? [];
                           print(data);
                           return ListView.builder(
-                              physics: const BouncingScrollPhysics(),
                               itemCount: data.length,
                               itemBuilder: (context, index) {
                                 if (title == "Hotel") {
+                                  Get.put(HotelController());
                                   return HotelInfoCard(
+                                    controller: Get.find(),
                                     data: data,
                                     isAdmin: false,
                                     index: index,
                                   );
                                 } else if (title == "Restaurant") {
+                                  Get.put(RestaurantController());
                                   return RestaurantInfoCard(
+                                    controller: Get.find(),
                                       index: index, data: data);
                                 } else if (title == "Events") {
+                                  //Get.put(HotelController());
                                   return EventInfoCard(
+                                    controller: Get.find(),
                                     index: index,
                                     data: data,
                                   );

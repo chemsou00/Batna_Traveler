@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../../../../controller/admin/event_controller.dart';
+
 class EventInfoCard extends StatelessWidget {
   const EventInfoCard(
-      {Key? key, this.isAdmin = false, required this.data, required this.index})
+      {Key? key,
+      this.isAdmin = false,
+      required this.data,
+      required this.index,
+      required this.controller})
       : super(key: key);
   final bool isAdmin;
 
   final List data;
   final int index;
+  final EventConfigController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,9 @@ class EventInfoCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Info(title: 'Title', data: data[index]["event_title"]),
-                    Info(title: 'Price', data: data[index]["event_price"]+' \$'),
+                    Info(
+                        title: 'Price',
+                        data: data[index]["event_price"] + ' \$'),
                     Info(title: 'Start', data: data[index]["event_start"]),
                     Info(title: 'End', data: data[index]["event_end"]),
                     Info(title: 'id', data: data[index]["event_id"].toString()),
@@ -45,7 +54,14 @@ class EventInfoCard extends StatelessWidget {
               ),
             ),
             isAdmin
-                ? IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
+                ? IconButton(
+                    onPressed: () {
+                      controller.showDeleteAlert(
+                        data[index]["event_id"],
+                        data[index]["event_title"],
+                      );
+                    },
+                    icon: const Icon(Icons.delete))
                 : const SizedBox(),
           ],
         ),

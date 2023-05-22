@@ -2,6 +2,7 @@ import 'package:batna_traveler/controller/admin/event_controller.dart';
 import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:batna_traveler/view/screens/auth/sign_in.dart';
 import 'package:batna_traveler/view/screens/auth/sign_up.dart';
+import 'package:batna_traveler/view/screens/favorite_screen.dart';
 import 'package:batna_traveler/view/screens/home_screen.dart';
 import 'package:batna_traveler/view/screens/on_boarding.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class AppRouts {
   static const String signUpScreen = '/signUpScreen';
   static const String adminPanel = '/adminPanel';
   static const String addNewData = '/addNewData';
+  static const String favorite = '/favorite';
 }
 
 List<GetPage<dynamic>>? routes = [
@@ -29,4 +31,5 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRouts.signUpScreen, page: () => const SignUpScreen()),
   GetPage(name: AppRouts.adminPanel, page: () => const AdminPanel()),
   GetPage(name: AppRouts.addNewData, page: () => const AddNewData(),),
+  GetPage(name: AppRouts.favorite, page: () => const FavoriteScreen(),),
 ];

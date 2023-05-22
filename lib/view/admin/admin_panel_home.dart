@@ -37,10 +37,6 @@ class AdminPanel extends StatelessWidget {
                   Theme.of(context).textTheme.titleLarge!.copyWith(height: 2),
             ),
             HomeScreenPanelCard(
-              onTap: () {},
-              title: "Categories Config",
-            ),
-            HomeScreenPanelCard(
               onTap: () {
                 // controller.gotoEventConfig();
                 Get.to(const ShowAllData(), arguments: {"title": "Events"});

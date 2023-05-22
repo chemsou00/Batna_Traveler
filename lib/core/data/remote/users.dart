@@ -27,7 +27,7 @@ class UserReadData {
   Crud crud;
   UserReadData(this.crud);
   postData() async {
-    var response = await crud.postData(AppLink.hotelRead, {});
+    var response = await crud.postData(AppLink.usersRead, {});
     return response.fold((l) => l, (r) => r);
   }
 }
@@ -38,7 +38,7 @@ class UserDeleteData {
   UserDeleteData(this.crud);
 
   postData(String id) async {
-    var response = await crud.postData(AppLink.hotelDelete, {
+    var response = await crud.postData(AppLink.usersDelete, {
       "id": id
     });
     return response.fold((l) => l, (r) => r);

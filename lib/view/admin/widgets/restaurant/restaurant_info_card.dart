@@ -1,3 +1,4 @@
+import 'package:batna_traveler/controller/admin/restaurant_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,10 +6,10 @@ class RestaurantInfoCard extends StatelessWidget {
   final List data ;
   final bool isAdmin;
   final int index ;
-
+  final RestaurantController controller ;
   const RestaurantInfoCard({
     super.key,
-    this.isAdmin = false, required this.data, required this.index,
+    this.isAdmin = false, required this.data, required this.index, required this.controller,
   });
 
   @override
@@ -67,7 +68,12 @@ class RestaurantInfoCard extends StatelessWidget {
                 ),
                 isAdmin
                     ? IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.delete))
+                        onPressed: () {
+                          controller.showDeleteAlert(
+                            data[index]["r_id"],
+                            data[index]["r_name"],
+                          );
+                        }, icon: const Icon(Icons.delete))
                     : const SizedBox(width: 10,),
               ],
             ),

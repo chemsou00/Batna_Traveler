@@ -1,3 +1,4 @@
+import 'package:batna_traveler/controller/show_data_controller.dart';
 import 'package:batna_traveler/core/data/remote/hotel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,8 +7,9 @@ import '../../core/functions/handling_data_controller.dart';
 import '../loading&message.dart';
 
 class HotelController extends GetxController {
-
   HotelData hotelData = HotelData(Get.find());
+  ShowDataController controller = Get.find();
+  HotelDeleteData hotelDeleteData = HotelDeleteData(Get.find());
 
   late TextEditingController nameController;
   late TextEditingController addressController;
@@ -19,7 +21,6 @@ class HotelController extends GetxController {
 
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   LoadingMessage loadingMessage = LoadingMessage();
-
 
   @override
   void onInit() {
@@ -48,8 +49,7 @@ class HotelController extends GetxController {
       if (StatusRequest.success == statusRequest) {
         if (response['status'] == "success") {
           Get.back();
-          loadingMessage.showError(
-              'Success Data Has Been Created', Icons.add);
+          loadingMessage.showError('Success Data Has Been Created', Icons.add);
         } else if (response['status'] == "failure") {
           Get.back();
           loadingMessage.showError(
@@ -68,6 +68,72 @@ class HotelController extends GetxController {
             'Failed to connect with the server', Icons.error_outline);
       }
     }
+  }
+ clearFields(){
+   nameController.clear();
+   addressController.clear();
+   phoneController.clear();
+   roomsController.clear();
+   rateController.clear();
+ }
+
+  deleteHotel(int id) async {
+    statusRequest = StatusRequest.loading;
+    loadingMessage.showLoading();
+    var response = await hotelDeleteData.postData(id.toString());
+    statusRequest = handlingData(response);
+    print(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == "success") {
+        Get.back();
+        loadingMessage.showError('Success Data Has Been deleted', Icons.add);
+      } else if (response['status'] == "failure") {
+        Get.back();
+        loadingMessage.showError(
+            'Error data not deleted', Icons.error_outline);
+      }
+    } else if (StatusRequest.offlineFailure == statusRequest) {
+      Get.back();
+      loadingMessage.showError('You are Offline', Icons.wifi_off);
+    } else if (StatusRequest.serverFailure == statusRequest) {
+      Get.back();
+      loadingMessage.showError(
+          'Failed to connect with the server', Icons.error_outline);
+    } else if (StatusRequest.serverException == statusRequest) {
+      Get.back();
+      loadingMessage.showError(
+          'Failed to connect with the server', Icons.error_outline);
+    }
+  }
+
+
+  showDeleteAlert(int id, String title,) {
+    Get.dialog(
+      barrierDismissible: false,
+      AlertDialog(
+        title: const Text('ALERT 🗑'),
+        content: Text("do you want to delete : $title\nwith id : $id"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text("cancel"),
+          ),
+          MaterialButton(
+            color: Colors.red,
+            onPressed: () async {
+              Get.back();
+              //code for delete the hotel
+              await deleteHotel(id);
+
+              controller.update();
+            },
+            child: const Text("delete"),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

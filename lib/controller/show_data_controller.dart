@@ -1,73 +1,108 @@
 
 import 'dart:convert';
 
-import 'package:batna_traveler/config/constants/api.dart';
-import 'package:batna_traveler/core/data/remote/category.dart';
-import 'package:batna_traveler/core/data/remote/event.dart';
+import 'package:batna_traveler/core/data/remote/hotel.dart';
+import 'package:batna_traveler/core/data/remote/restaurant.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../config/constants/api.dart';
 import 'package:http/http.dart' as http;
-import '../core/class/status_request.dart';
-import '../core/functions/handling_data_controller.dart';
 
-
-class HomeController extends GetxController {
-  EventReadData eventReadData = EventReadData(Get.find());
-  CategoryReadData categoryReadData = CategoryReadData(Get.find());
+class ShowDataController extends GetxController {
+  HotelReadData hotelReadData = HotelReadData(Get.find());
+  RestaurantReadData restaurantReadData = RestaurantReadData(Get.find());
   late List<dynamic> events = [];
   late List<dynamic> categories= [];
-  late StatusRequest statusRequest;
   bool loading = false;
 
-  getData() async {
-    statusRequest = StatusRequest.loading;
-    final response = await categoryReadData.postData();
-    statusRequest = handlingData(response);
-    if (StatusRequest.success == statusRequest) {
-      if (response['status'] == "success") {
-        categories.addAll(response['data']);
-      } else {
-        statusRequest = StatusRequest.failure;
+  getData(String title) async {
+    if(title == "Hotel") {
+      Uri url = Uri.parse(AppLink.hotelRead);
+      try {
+        var response = await http.get(url).timeout(Duration(seconds: 10));
+        if(response.statusCode == 200){
+          //print(jsonDecode(response.body));
+          return jsonDecode(response.body);
+        }else {
+          throw Exception('Request failed with status: ${response.statusCode}');}
+      }catch (e){
+        throw Exception('Error: $e');
       }
     }
-    update();
-  }
-getCategories() async {
-    Uri url = Uri.parse(AppLink.categoryRead);
-    try {
-    var response = await http.get(url).timeout(Duration(seconds: 10));
-
-      if(response.statusCode == 200){
-        print(response);
-        return jsonDecode(response.body);
-      }else {
-        throw Exception('Request failed with status: ${response.statusCode}');}
-    }catch (e){
-      throw Exception('Error: $e');
+    if (title == "Restaurant"){
+      Uri url = Uri.parse(AppLink.restaurantRead);
+      try {
+        var response = await http.get(url).timeout(Duration(seconds: 10));
+        if(response.statusCode == 200){
+          print(jsonDecode(response.body));
+          return jsonDecode(response.body);
+        }else {
+          throw Exception('Request failed with status: ${response.statusCode}');}
+      }catch (e){
+        throw Exception('Error: $e');
+      }
     }
-
-  }
-  getEvents() async {
-    Uri url = Uri.parse(AppLink.eventRead);
-    try {
-      var response = await http.get(url).timeout(Duration(seconds: 10));
-
-      if(response.statusCode == 200){
-        print(response);
-        return jsonDecode(response.body);
-      }else {
-        throw Exception('Request failed with status: ${response.statusCode}');}
-    }catch (e){
-      throw Exception('Error: $e');
+    if (title == "Events"){
+      Uri url = Uri.parse(AppLink.eventRead);
+      try {
+        var response = await http.get(url);
+        if(response.statusCode == 200){
+          //print(jsonDecode(response.body));
+          return jsonDecode(response.body);
+        }else {
+          throw Exception('Request failed with status: ${response.statusCode}');}
+      }catch (e){
+        throw Exception('Error: $e');
+      }
+    }
+    if(title == "Users"){
+      Uri url = Uri.parse(AppLink.usersRead);
+      try {
+        var response = await http.get(url);
+        if(response.statusCode == 200){
+          //print(jsonDecode(response.body));
+          return jsonDecode(response.body);
+        }else {
+          throw Exception('Request failed with status: ${response.statusCode}');}
+      }catch (e){
+        throw Exception('Error: $e');
+      }
     }
   }
+
+  deleteHotel(int id,String title){
+    Get.dialog(
+      barrierDismissible: false,
+      AlertDialog(
+        title: Text('ALERT'),
+        content: Text("your are going to delete : $title with id : $id"),
+        actions: [
+          MaterialButton(
+            color: Colors.red,
+            onPressed: () {
+            },
+            child: const Text("delete"),
+          ),
+          TextButton(
+            onPressed: () {
+            },
+            child: const Text("cancel"),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   refreshScreen()async {
-  await Future.delayed(Duration(seconds: 1));
+  Future.delayed(Duration(seconds: 2));
   update();
   }
 
   @override
-  void onInit() async {
+  void onInit() async{
+    //await getData("Hotel");
     super.onInit();
   }
 }

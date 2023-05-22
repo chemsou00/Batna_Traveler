@@ -79,7 +79,7 @@ class AddRestaurant extends StatelessWidget {
                 decoration: const InputDecoration(
                   labelText: 'Number of tables',
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.hotel),
+                  prefixIcon: Icon(Icons.restaurant),
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -88,6 +88,7 @@ class AddRestaurant extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     controller.onSubmition();
+                    controller.clearFields();
                   },
                   child: const Text('Submit'),
                 ),
