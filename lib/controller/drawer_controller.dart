@@ -3,6 +3,7 @@
 
 
 import 'package:batna_traveler/config/routes/routs.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../core/services/services.dart';
@@ -12,6 +13,7 @@ class CustomDrawerController extends GetxController{
    String? email ;
    String? username ;
    String? role ;
+   bool isDark = false ;
    late bool isAdmin ;
    goToAdminPanel(){
      Get.toNamed(AppRouts.adminPanel);
@@ -20,6 +22,17 @@ class CustomDrawerController extends GetxController{
     Get.offAllNamed(AppRouts.signInScreen);
     myServices.sharedPreferences.clear();
   }
+  changeTheme(bool state){
+     isDark = state ;
+     myServices.sharedPreferences.setBool("isDark", state);
+     if(isDark){
+       Get.changeThemeMode(ThemeMode.dark);
+     }else {
+         Get.changeThemeMode(ThemeMode.light);
+       }
+     update();
+     }
+
 
   @override
   void onInit() {

@@ -13,6 +13,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -22,9 +23,12 @@ class MyApp extends StatelessWidget {
       getPages: routes,
       initialBinding: InitialBindings(),
       theme: ThemeData(
-         primarySwatch: Colors.cyan
+        primarySwatch: Colors.cyan,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.cyan,
       ),
     );
   }
 }
-

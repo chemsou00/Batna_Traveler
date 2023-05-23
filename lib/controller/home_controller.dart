@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:batna_traveler/config/constants/api.dart';
 import 'package:batna_traveler/core/data/remote/category.dart';
 import 'package:batna_traveler/core/data/remote/event.dart';
+import 'package:batna_traveler/core/services/services.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../core/class/status_request.dart';
@@ -11,6 +13,7 @@ import '../core/functions/handling_data_controller.dart';
 
 
 class HomeController extends GetxController {
+  MyServices myServices = Get.find();
   EventReadData eventReadData = EventReadData(Get.find());
   CategoryReadData categoryReadData = CategoryReadData(Get.find());
   late List<dynamic> events = [];
@@ -66,8 +69,16 @@ getCategories() async {
   update();
   }
 
+  ThemeMode themeMode(){
+    bool isDark = myServices.sharedPreferences.getBool("isDark") ?? false;
+    if(isDark){
+      return ThemeMode.dark;
+    }else
+    return ThemeMode.light;
+  }
   @override
   void onInit() async {
+    themeMode();
     super.onInit();
   }
 }

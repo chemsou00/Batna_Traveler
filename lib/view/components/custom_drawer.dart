@@ -14,10 +14,10 @@ class CustomDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-                "User name : ${controller.username} \nRole : ${controller.role}"),
+                "User name : ${controller.username} \nRole : ${controller
+                    .role}"),
             accountEmail: Text("Email : ${controller.email}"),
-            currentAccountPicture: const Icon(Icons.person,size: 60,),
-            decoration: const BoxDecoration(color: Colors.white,),
+            currentAccountPicture: const Icon(Icons.person, size: 60,),
             currentAccountPictureSize: const Size(40, 40),
           ),
           ListTile(
@@ -28,16 +28,24 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             trailing: const Icon(Icons.arrow_forward),
           ),
-           ExpansionTile(
-              leading : const Icon(Icons.settings),
-              title: const Text("Settings"),
-              children: [
-                SwitchListTile(
-                    title:  const Text("Dark Mode"),
-                    value: false,
-                    onChanged: (v) {
-                    }),
-              ]),
+          GetBuilder<CustomDrawerController>(
+            assignId: true,
+            builder: (logic) {
+              return ExpansionTile(
+                  leading: const Icon(Icons.settings),
+                  title: const Text("Settings"),
+                  children: [
+                    SwitchListTile(
+                        title: const Text("Dark Mode"),
+                        value: logic.isDark,
+                        onChanged: (v) {
+                          logic.isDark = v ;
+                          //logic.changeTheme(v);
+                          logic.update();
+                        }),
+                  ]);
+            },
+          ),
           ListTile(
             onTap: () async {
               Get.back();
@@ -50,15 +58,15 @@ class CustomDrawer extends StatelessWidget {
           ),
           controller.isAdmin
               ? ListTile(
-                  onTap: () async {
-                    Get.back();
-                    await Future.delayed(const Duration(milliseconds: 500));
-                    controller.goToAdminPanel();
-                  },
-                  title: const Text("Admin Panel"),
-                  leading: const Icon(Icons.admin_panel_settings),
-                  trailing: const Icon(Icons.arrow_forward),
-                )
+            onTap: () async {
+              Get.back();
+              await Future.delayed(const Duration(milliseconds: 500));
+              controller.goToAdminPanel();
+            },
+            title: const Text("Admin Panel"),
+            leading: const Icon(Icons.admin_panel_settings),
+            trailing: const Icon(Icons.arrow_forward),
+          )
               : const SizedBox(),
           const Spacer(),
           ListTile(
