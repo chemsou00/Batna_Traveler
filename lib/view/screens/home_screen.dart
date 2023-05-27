@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:batna_traveler/config/constants/app_colors.dart';
 import 'package:batna_traveler/controller/home_controller.dart';
-import 'package:batna_traveler/view/admin/admin_panel_home.dart';
 import 'package:batna_traveler/view/components/custom_drawer.dart';
 import 'package:batna_traveler/view/components/home_widgets.dart';
 import 'package:batna_traveler/view/components/search_bar.dart';
@@ -72,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                             return Center(child: CircularProgressIndicator());
                           }
                           if (snapshot.hasData) {
-                            List<dynamic> data = snapshot.data["data"];
+                            List<dynamic> data = snapshot.data["data"] ?? [];
                             return ListView.builder(
                               physics: BouncingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
@@ -116,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                             );
                           }
                           if (snapshot.hasData) {
-                            List<dynamic> data = snapshot.data["data"];
+                            List<dynamic> data = snapshot.data["data"] ?? [];
                             return GridView.builder(
                               itemCount: data.length,
                               gridDelegate:

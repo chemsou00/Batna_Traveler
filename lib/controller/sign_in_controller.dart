@@ -25,6 +25,11 @@ class SignInController extends GetxController {
     super.onInit();
   }
 
+  obscure(){
+    obscureText = !obscureText ;
+    update();
+  }
+
   signIn() async {
     if (formState.currentState!.validate()) {
       statusRequest = StatusRequest.loading;

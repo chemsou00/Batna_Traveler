@@ -11,6 +11,7 @@ import '../../../core/functions/valid_input.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(SignInController());
@@ -21,7 +22,7 @@ class SignInScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const LogoApp(),
             const Text(
               "Welcome\nBack",
@@ -61,19 +62,32 @@ class SignInScreen extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  TextFormField(
-                    textInputAction: TextInputAction.go,
-                    controller: controller.passwordController,
-                    validator: (val) {
-                      return validInput(val!, 20, 8, "password");
-                    },
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: textFieldDecoration.copyWith(
-                      hintText: "Password",
-                      prefixIcon: const Icon(Icons.password),
-                      suffixIcon: const Icon(Icons.visibility_off),
-                    ),
-                  ),
+                  GetBuilder<SignInController>(
+                      builder: (logic) {
+                        return TextFormField(obscureText: logic.obscureText,
+                          textInputAction: TextInputAction.go,
+                          controller: controller.passwordController,
+                          validator: (val) {
+                            return validInput(val!, 20, 8, "password");
+                          },
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: textFieldDecoration.copyWith(
+                            hintText: "Password",
+                            prefixIcon: const Icon(Icons.password),
+                            suffixIcon: controller.obscureText
+                                ? IconButton(
+                                onPressed: () {
+                                  logic.obscure();
+                                },
+                                icon: Icon(Icons.visibility_off))
+                                : IconButton(
+                                onPressed: () {
+                                  logic.obscure();
+                                },
+                                icon: Icon(Icons.visibility)),
+                          ),
+                        );
+                      }),
                   const SizedBox(
                     height: 30,
                   ),
